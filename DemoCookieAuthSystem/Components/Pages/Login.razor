@@ -1,0 +1,53 @@
+﻿@page "/Account/Login"
+
+<PageTitle>Login</PageTitle>
+
+<h1>Please Login</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <section>
+            <EditForm Model="LoginData" method="post" OnValidSubmit="LoginUser" FormName="login">
+                <DataAnnotationsValidator />
+                <hr />
+                <ValidationSummary class="text-danger" role="alert" />
+
+                <div class="form-floating mb-3">
+                    <InputText @bind-Value="LoginData.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <label for="email" class="form-label">Email</label>
+                    <ValidationMessage For="() => LoginData.Email" class="text-danger" />
+                </div>
+
+                <div class="form-floating mb-3">
+                    <InputText type="password" @bind-Value="LoginData.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                    <label for="password" class="form-label">Password</label>
+                    <ValidationMessage For="() => LoginData.Password" class="text-danger" />
+                </div>
+
+                <div>
+                    <button type="submit" class="w-100 btn btn-lg btn-primary">Login</button>
+                </div>
+            </EditForm>
+        </section>
+        @Error
+    </div>
+</div>
+
+@code {
+    string? Error;
+
+    [SupplyParameterFromForm]
+    private LoginDto LoginData { get; set; } = new();
+
+    public async Task LoginUser()
+    {
+        Error = "";
+        var result = await accountService.LoginAsync(LoginData);
+
+        if (result.Flag)
+        {
+            NavManager.NavigateTo("/");
+        }
+        Error = result.Message;
+    }
+}
