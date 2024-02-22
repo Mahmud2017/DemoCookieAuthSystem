@@ -11,7 +11,7 @@ namespace DemoCookieAuthSystem.Authentication
             ArgumentNullException.ThrowIfNull(endpoint);
 
             var accountGroup = endpoint.MapGroup("/Account");
-            accountGroup.MapPost("/Logout", async (ClaimsPrincipal user, SignInManager<ApplicaitonUser> signInManager) => 
+            accountGroup.MapPost("/Logout", async (ClaimsPrincipal user, SignInManager<ApplicationUser> signInManager) => 
             {
                 await signInManager.SignOutAsync();
                 return TypedResults.LocalRedirect("/");

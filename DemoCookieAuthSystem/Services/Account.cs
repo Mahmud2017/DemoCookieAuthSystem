@@ -8,11 +8,11 @@ namespace DemoCookieAuthSystem.Services
 {
     public class Account : IAccount
     {
-        private readonly UserManager<ApplicaitonUser> _userManager;
-        private readonly SignInManager<ApplicaitonUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public Account(UserManager<ApplicaitonUser> userManager, SignInManager<ApplicaitonUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public Account(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -26,7 +26,7 @@ namespace DemoCookieAuthSystem.Services
             if (findUser != null)
                 return new ServiceResponse(false, "User already exists");
 
-            var appUser = new ApplicaitonUser()
+            var appUser = new ApplicationUser()
             {
                 Name = model.FullName,
                 UserName = model.Email,

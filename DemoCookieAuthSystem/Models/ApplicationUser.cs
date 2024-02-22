@@ -2,7 +2,7 @@
 
 namespace DemoCookieAuthSystem.Models
 {
-    public class ApplicaitonUser : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         public string Name { get; set; } = string.Empty;
     }

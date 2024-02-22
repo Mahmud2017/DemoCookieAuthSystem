@@ -24,7 +24,7 @@ builder.Services.AddAuthentication(o =>
     o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
 }).AddIdentityCookies();
 
-builder.Services.AddIdentityCore<ApplicaitonUser>()
+builder.Services.AddIdentityCore<ApplicationUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddSignInManager()
